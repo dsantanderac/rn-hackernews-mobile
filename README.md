@@ -1,7 +1,6 @@
 # Hacker News Mobile
 
 Hacker News Mobile is built using TypeScript and React Native.
-It uses Metro, the JavaScript bundler for React Native to join the code and all its dependencies together.
 
 ## Prerequisites
 
