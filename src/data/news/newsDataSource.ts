@@ -15,7 +15,7 @@ export const newsRepository: NewsDataSource = {
     try {
       var hits = await newsRemoteDataSource.getNews();
 
-      await AsyncStorage.setItem(LOCAL_STORAGE.NEWS, JSON.stringify(hits));
+      await newsLocalDataSource.saveNews(JSON.stringify(hits));
       return hits;
     } catch (error) {
       console.error(error);

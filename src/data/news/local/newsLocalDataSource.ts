@@ -6,6 +6,7 @@ export interface NewsLocalDataSource {
   getNews(): Promise<NewsHitsModel[]>;
   deleteNew(id: string): Promise<boolean>;
   getDeletedNews(): Promise<string[]>;
+  saveNews(newsJson: string): Promise<boolean>;
 }
 
 export const newsLocalDataSource: NewsLocalDataSource = {
@@ -24,7 +25,7 @@ export const newsLocalDataSource: NewsLocalDataSource = {
       );
       return true;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
     }
   },
@@ -33,8 +34,17 @@ export const newsLocalDataSource: NewsLocalDataSource = {
       var deletedStr = await AsyncStorage.getItem(LOCAL_STORAGE.DELETED);
       return deletedStr ? JSON.parse(deletedStr) : [];
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return [];
+    }
+  },
+  async saveNews(newsJson: string): Promise<boolean> {
+    try {
+      await AsyncStorage.setItem(LOCAL_STORAGE.NEWS, newsJson);
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   },
 };
